@@ -1,0 +1,9 @@
+G:\_IvtFtp\_IvtFtp\bin\Debug\_IvtFtp.exe.config
+G:\_IvtFtp\_IvtFtp\bin\Debug\_IvtFtp.exe
+G:\_IvtFtp\_IvtFtp\bin\Debug\_IvtFtp.pdb
+G:\_IvtFtp\_IvtFtp\obj\Debug\_IvtFtp.csprojAssemblyReference.cache
+G:\_IvtFtp\_IvtFtp\obj\Debug\_IvtFtp.Properties.Resources.resources
+G:\_IvtFtp\_IvtFtp\obj\Debug\_IvtFtp.csproj.GenerateResource.cache
+G:\_IvtFtp\_IvtFtp\obj\Debug\_IvtFtp.csproj.CoreCompileInputs.cache
+G:\_IvtFtp\_IvtFtp\obj\Debug\_IvtFtp.exe
+G:\_IvtFtp\_IvtFtp\obj\Debug\_IvtFtp.pdb
