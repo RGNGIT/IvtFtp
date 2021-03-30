@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace _IvtFtp
 {
+
     class FtpClient
     {
 
     }
+
 }
