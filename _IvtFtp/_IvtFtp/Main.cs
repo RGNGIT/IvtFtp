@@ -21,11 +21,16 @@ namespace _IvtFtp
             InitializeComponent();
         }
 
-        List<String> LogWrite = new List<String>();
+        static String Version = "0.1";
+        List<String> LogWrite = new List<String>() 
+        { 
+            $"[DurkaFiles v{Version} by RGN]",
+            $"[First initialized at {DateTime.Now}]"
+        };
 
         public void LogOutput(String Message)
         {
-            LogWrite.Add($"<{DateTime.Today}> {Message}");
+            LogWrite.Add($"<{DateTime.Now}> {Message}");
             LogBox.Items.Add(LogWrite[LogWrite.Count - 1]);
         }
 
@@ -47,6 +52,7 @@ namespace _IvtFtp
 
         private void OnFileOutput(object sender, EventArgs e)
         {
+            LogOutput("Лог записан! Чекай корневую директорию программы на наличие файла 'log.rgn'");
             File.WriteAllLines(@"log.rgn", LogWrite);
         }
 

@@ -74,7 +74,7 @@
             // 
             // FileOutput
             // 
-            this.FileOutput.Location = new System.Drawing.Point(568, 400);
+            this.FileOutput.Location = new System.Drawing.Point(574, 400);
             this.FileOutput.Name = "FileOutput";
             this.FileOutput.Size = new System.Drawing.Size(107, 23);
             this.FileOutput.TabIndex = 2;
@@ -84,7 +84,7 @@
             // 
             // buttonClearLog
             // 
-            this.buttonClearLog.Location = new System.Drawing.Point(681, 400);
+            this.buttonClearLog.Location = new System.Drawing.Point(687, 400);
             this.buttonClearLog.Name = "buttonClearLog";
             this.buttonClearLog.Size = new System.Drawing.Size(107, 23);
             this.buttonClearLog.TabIndex = 1;
