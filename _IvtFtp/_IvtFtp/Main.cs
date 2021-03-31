@@ -16,9 +16,16 @@ namespace _IvtFtp
     public partial class Main : Form
     {
 
+        [DllImport("kernel32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        static extern bool AllocConsole();
+
         public Main()
         {
             InitializeComponent();
+            dataGridFilesToLoad.AllowDrop = true;
+            dataGridFilesToLoad.DragDrop += new DragEventHandler(Files_DragDrop);
+            dataGridFilesToLoad.DragEnter += new DragEventHandler(Files_DragEnter);
         }
 
         static String Version = "0.1";
@@ -34,14 +41,31 @@ namespace _IvtFtp
             LogBox.Items.Add(LogWrite[LogWrite.Count - 1]);
         }
 
-        [DllImport("kernel32.dll", SetLastError = true)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        static extern bool AllocConsole();
-
         private void Main_Load(object sender, EventArgs e)
         {
             AllocConsole();
             LogOutput("FTP-клиент дурки успешно стартанул!");
+        }
+
+        private void Files_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop) && ((e.AllowedEffect & DragDropEffects.Move) == DragDropEffects.Move))
+            {
+                e.Effect = DragDropEffects.Move;
+            }
+        }
+
+        private void Files_DragDrop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop) && e.Effect == DragDropEffects.Move)
+            {
+                string[] Path = (string[])e.Data.GetData(DataFormats.FileDrop);
+                foreach (string FilePath in Path)
+                {
+                    dataGridFilesToLoad.Rows.Add(FilePath);
+                    LogOutput($"[{dataGridFilesToLoad.Name}]: Файл/Каталог '{FilePath}' добавлен в очередь к загрузке");
+                }
+            }
         }
 
         private void OnClearLog(object sender, EventArgs e)
@@ -54,6 +78,14 @@ namespace _IvtFtp
         {
             LogOutput("Лог записан! Чекай корневую директорию программы на наличие файла 'log.rgn'");
             File.WriteAllLines(@"log.rgn", LogWrite);
+        }
+
+        private void OnDeleteToUploadFiles(object sender, EventArgs e)
+        {
+            foreach(DataGridViewRow row in dataGridFilesToLoad.SelectedRows)
+            {
+                dataGridFilesToLoad.Rows.Remove(row);
+            }
         }
 
     }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace _IvtFtp
 {
 
-    class FtpClient
+    static public class FtpClient
     {
 
     }

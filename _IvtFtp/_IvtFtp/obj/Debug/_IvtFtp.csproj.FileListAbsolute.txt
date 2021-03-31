@@ -17,3 +17,13 @@ C:\Users\RGN\Source\Repos\RGNGIT\IvtFtp\_IvtFtp\_IvtFtp\obj\Debug\_IvtFtp.csproj
 C:\Users\RGN\Source\Repos\RGNGIT\IvtFtp\_IvtFtp\_IvtFtp\obj\Debug\_IvtFtp.csproj.CoreCompileInputs.cache
 C:\Users\RGN\Source\Repos\RGNGIT\IvtFtp\_IvtFtp\_IvtFtp\obj\Debug\_IvtFtp.exe
 C:\Users\RGN\Source\Repos\RGNGIT\IvtFtp\_IvtFtp\_IvtFtp\obj\Debug\_IvtFtp.pdb
+C:\Users\Rageon\Source\Repos\RGNGIT\IvtFtp\_IvtFtp\_IvtFtp\bin\Debug\_IvtFtp.exe.config
+C:\Users\Rageon\Source\Repos\RGNGIT\IvtFtp\_IvtFtp\_IvtFtp\bin\Debug\_IvtFtp.exe
+C:\Users\Rageon\Source\Repos\RGNGIT\IvtFtp\_IvtFtp\_IvtFtp\bin\Debug\_IvtFtp.pdb
+C:\Users\Rageon\Source\Repos\RGNGIT\IvtFtp\_IvtFtp\_IvtFtp\obj\Debug\_IvtFtp.csprojAssemblyReference.cache
+C:\Users\Rageon\Source\Repos\RGNGIT\IvtFtp\_IvtFtp\_IvtFtp\obj\Debug\_IvtFtp.Main.resources
+C:\Users\Rageon\Source\Repos\RGNGIT\IvtFtp\_IvtFtp\_IvtFtp\obj\Debug\_IvtFtp.Properties.Resources.resources
+C:\Users\Rageon\Source\Repos\RGNGIT\IvtFtp\_IvtFtp\_IvtFtp\obj\Debug\_IvtFtp.csproj.GenerateResource.cache
+C:\Users\Rageon\Source\Repos\RGNGIT\IvtFtp\_IvtFtp\_IvtFtp\obj\Debug\_IvtFtp.csproj.CoreCompileInputs.cache
+C:\Users\Rageon\Source\Repos\RGNGIT\IvtFtp\_IvtFtp\_IvtFtp\obj\Debug\_IvtFtp.exe
+C:\Users\Rageon\Source\Repos\RGNGIT\IvtFtp\_IvtFtp\_IvtFtp\obj\Debug\_IvtFtp.pdb
