@@ -20,6 +20,9 @@ namespace _IvtFtp
         [return: MarshalAs(UnmanagedType.Bool)]
         static extern bool AllocConsole();
 
+        private String Login = String.Empty;
+        private String Password = String.Empty;
+
         public Main()
         {
             InitializeComponent();
@@ -35,6 +38,23 @@ namespace _IvtFtp
             $"[First initialized at {DateTime.Now}]"
         };
 
+        void ApplyCredentialsOnStart()
+        {
+            Login = "testuser";
+            Password = "12345678";
+            FtpClient.SetCredential = new System.Net.NetworkCredential(Login, Password);
+            LogOutput($"Настройки авторизации успешно применены! (System.Net.NetworkCredential({Login}, {Password}))");
+        }
+
+        void FtpResponseLogOutput()
+        {
+            foreach(String i in FtpClient.GetStatusList) 
+            {
+                LogOutput(i);
+            }
+            FtpClient.GetStatusList.Clear();
+        }
+
         public void LogOutput(String Message)
         {
             LogWrite.Add($"<{DateTime.Now}> {Message}");
@@ -45,6 +65,7 @@ namespace _IvtFtp
         {
             AllocConsole();
             LogOutput("FTP-клиент дурки успешно стартанул!");
+            ApplyCredentialsOnStart();
         }
 
         private void Files_DragEnter(object sender, DragEventArgs e)
