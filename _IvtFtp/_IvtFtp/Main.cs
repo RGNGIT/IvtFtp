@@ -13,8 +13,9 @@ namespace _IvtFtp
         [return: MarshalAs(UnmanagedType.Bool)]
         static extern bool AllocConsole();
 
-        private String Login = String.Empty;
-        private String Password = String.Empty;
+        private String Login = "testuser";
+        private String Password = "12345678";
+        private String URL = "ftp://ftp.19ivt.ru/files/";
 
         public Main()
         {
@@ -33,8 +34,6 @@ namespace _IvtFtp
 
         void ApplyCredentialsOnStart()
         {
-            Login = "testuser";
-            Password = "12345678";
             FtpClient.SetCredential = new System.Net.NetworkCredential(Login, Password);
             LogOutput($"Настройки авторизации успешно применены! (System.Net.NetworkCredential({Login}, {Password}))");
         }
@@ -56,9 +55,11 @@ namespace _IvtFtp
 
         private void Main_Load(object sender, EventArgs e)
         {
+            Debug();
             AllocConsole();
             LogOutput("FTP-клиент дурки успешно стартанул!");
             ApplyCredentialsOnStart();
+            UpdateNetExplorer();
         }
 
         private void Files_DragEnter(object sender, DragEventArgs e)
@@ -80,6 +81,11 @@ namespace _IvtFtp
                     LogOutput($"[{dataGridFilesToLoad.Name}]: Файл/Каталог '{FilePath}' добавлен в очередь к загрузке");
                 }
             }
+        }
+
+        void Debug()
+        {
+
         }
 
         private void OnClearLog(object sender, EventArgs e)
@@ -107,7 +113,7 @@ namespace _IvtFtp
         {
             foreach (DataGridViewRow row in dataGridExplorer.SelectedRows)
             {
-                Uri CurrentUri = new Uri("ftp://ftp.19ivt.ru/files/" + row.Cells[0].Value.ToString());
+                Uri CurrentUri = new Uri(URL + row.Cells[0].Value.ToString());
                 FtpClient.OnDeleteFileFromServer(CurrentUri);
                 FtpResponseLogOutput();
             }
@@ -115,18 +121,27 @@ namespace _IvtFtp
 
         private void OnUpdateList(object sender, EventArgs e) // Обновление списка файлов
         {
-
+            dataGridExplorer.Rows.Clear();
+            UpdateNetExplorer();
             FtpResponseLogOutput();
+        }
+
+        void UpdateNetExplorer()
+        {
+            foreach (String i in FtpClient.OnGetDirList(new Uri(URL)))
+            {
+                dataGridExplorer.Rows.Add(i);
+            }
         }
 
         private void OnDownloadFile(object sender, EventArgs e) // Загрузка файла
         {
             foreach (DataGridViewRow row in dataGridExplorer.SelectedRows)
             {
-                Uri CurrentUri = new Uri("ftp://ftp.19ivt.ru/files/" + row.Cells[0].Value.ToString());
+                Uri CurrentUri = new Uri(URL + row.Cells[0].Value.ToString());
                 byte[] CurrentFile = FtpClient.OnGetFileFromServer(CurrentUri);
                 FtpResponseLogOutput();
-                LogOutput(FileManager.WriteFile(CurrentFile, CurrentUri));
+                LogOutput(FileManager.WriteFile(CurrentFile, CurrentUri, row.Cells[0].Value.ToString()));
             }
         }
 

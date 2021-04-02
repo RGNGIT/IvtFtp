@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Net;
 using System.Collections.Generic;
 
@@ -40,7 +41,7 @@ namespace _IvtFtp
                 Request.Credentials = CurrentCredential;
                 Request.Method = WebRequestMethods.Ftp.DeleteFile;
                 FtpWebResponse Response = Request.GetResponse() as FtpWebResponse;
-                StatusList.Add($"Статус удаления файла: {Response.StatusDescription}");
+                StatusList.Add($"Статус удаления файла '{ServerUri}': {Response.StatusDescription}");
                 Response.Close();
                 return true;
             }
@@ -69,6 +70,22 @@ namespace _IvtFtp
                     return null;
                 }
             }
+        }
+
+        public static List<String> OnGetDirList(Uri ServerUri)
+        {
+            List<String> Temp = new List<String>();
+            FtpWebRequest Request = WebRequest.Create(ServerUri) as FtpWebRequest;
+            Request.Method = WebRequestMethods.Ftp.ListDirectory;
+            Request.Credentials = CurrentCredential;
+            FtpWebResponse Response = Request.GetResponse() as FtpWebResponse;
+            Stream ResponseStream = Response.GetResponseStream();
+            StreamReader Reader = new StreamReader(ResponseStream);
+            while(Reader.Peek() != -1)
+            {
+                Temp.Add(Reader.ReadLine());
+            }
+            return Temp;
         }
 
     }
