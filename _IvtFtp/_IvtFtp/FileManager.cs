@@ -11,18 +11,23 @@ namespace _IvtFtp
         private static String GetType(String Path)
         {
             String Temp = String.Empty;
+            String Reverse = String.Empty;
             for(int i = Path.Length - 1; Path[i] != '.'; i--)
             {
                 Temp += Path[i];
             }
-            return Temp;
+            for (int i = Temp.Length - 1; i >= 0; i--)
+            {
+                Reverse += Temp[i];
+            }
+            return Reverse;
         }
 
         public static String WriteFile(byte[] CurrentFile, Uri ServerUri)
         {
             try
             {
-                File.WriteAllBytes($@".{GetType(ServerUri.ToString())}", CurrentFile);
+                File.WriteAllBytes($@"File.{GetType(ServerUri.ToString())}", CurrentFile);
                 return "Файл успешно записан!";
             }
             catch(Exception e)

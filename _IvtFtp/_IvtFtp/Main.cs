@@ -105,8 +105,12 @@ namespace _IvtFtp
 
         private void OnCallDeleteFromServer(object sender, EventArgs e) // Вызов удаления файла с сервера
         {
-
-            FtpResponseLogOutput();
+            foreach (DataGridViewRow row in dataGridExplorer.SelectedRows)
+            {
+                Uri CurrentUri = new Uri("ftp://ftp.19ivt.ru/files/" + row.Cells[0].Value.ToString());
+                FtpClient.OnDeleteFileFromServer(CurrentUri);
+                FtpResponseLogOutput();
+            }
         }
 
         private void OnUpdateList(object sender, EventArgs e) // Обновление списка файлов
@@ -117,8 +121,13 @@ namespace _IvtFtp
 
         private void OnDownloadFile(object sender, EventArgs e) // Загрузка файла
         {
-
-            FtpResponseLogOutput();
+            foreach (DataGridViewRow row in dataGridExplorer.SelectedRows)
+            {
+                Uri CurrentUri = new Uri("ftp://ftp.19ivt.ru/files/" + row.Cells[0].Value.ToString());
+                byte[] CurrentFile = FtpClient.OnGetFileFromServer(CurrentUri);
+                FtpResponseLogOutput();
+                LogOutput(FileManager.WriteFile(CurrentFile, CurrentUri));
+            }
         }
 
     }

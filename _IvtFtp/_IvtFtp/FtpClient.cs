@@ -60,7 +60,7 @@ namespace _IvtFtp
                 try
                 {
                     byte[] FileData = Request.DownloadData(ServerUri.ToString());
-                    StatusList.Add($"Сериализованый поток байтов файла '{ServerUri}' успешно загружен!");
+                    StatusList.Add($"Сериализованый поток байтов файла '{ServerUri}' успешно загружен! ({FileData.Length} байт)");
                     return FileData;
                 }
                 catch(Exception e)
