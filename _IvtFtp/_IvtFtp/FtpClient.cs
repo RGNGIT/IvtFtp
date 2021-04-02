@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Net;
+using System.Collections.Generic;
 
 namespace _IvtFtp
 {
@@ -49,7 +46,7 @@ namespace _IvtFtp
             }
         }
 
-        public static object OnGetFileFromServer(Uri ServerUri)
+        public static byte[] OnGetFileFromServer(Uri ServerUri) // Получание сериализованного потока байтов файла
         {
             if(ServerUri.Scheme != Uri.UriSchemeFtp)
             {
@@ -63,7 +60,7 @@ namespace _IvtFtp
                 try
                 {
                     byte[] FileData = Request.DownloadData(ServerUri.ToString());
-                    StatusList.Add($"Файл по пути '{ServerUri}' успешно загружен!");
+                    StatusList.Add($"Сериализованый поток байтов файла '{ServerUri}' успешно загружен!");
                     return FileData;
                 }
                 catch(Exception e)

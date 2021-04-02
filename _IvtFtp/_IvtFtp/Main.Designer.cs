@@ -37,13 +37,13 @@
             this.buttonDeleteUpload = new System.Windows.Forms.Button();
             this.buttonUpload = new System.Windows.Forms.Button();
             this.dataGridExplorer = new System.Windows.Forms.DataGridView();
+            this._pathexplorer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridFilesToLoad = new System.Windows.Forms.DataGridView();
             this._path = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.FileOutput = new System.Windows.Forms.Button();
             this.buttonClearLog = new System.Windows.Forms.Button();
             this.LogBox = new System.Windows.Forms.ListBox();
-            this._pathexplorer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridExplorer)).BeginInit();
@@ -108,6 +108,7 @@
             this.buttonDownload.TabIndex = 6;
             this.buttonDownload.Text = "Выгрузить на комп";
             this.buttonDownload.UseVisualStyleBackColor = true;
+            this.buttonDownload.Click += new System.EventHandler(this.OnDownloadFile);
             // 
             // progressBar1
             // 
@@ -145,6 +146,12 @@
             this.dataGridExplorer.Name = "dataGridExplorer";
             this.dataGridExplorer.Size = new System.Drawing.Size(387, 383);
             this.dataGridExplorer.TabIndex = 2;
+            // 
+            // _pathexplorer
+            // 
+            this._pathexplorer.HeaderText = "Файл/Каталог";
+            this._pathexplorer.Name = "_pathexplorer";
+            this._pathexplorer.Width = 342;
             // 
             // dataGridFilesToLoad
             // 
@@ -205,12 +212,6 @@
             this.LogBox.Name = "LogBox";
             this.LogBox.Size = new System.Drawing.Size(788, 381);
             this.LogBox.TabIndex = 0;
-            // 
-            // _pathexplorer
-            // 
-            this._pathexplorer.HeaderText = "Файл/Каталог";
-            this._pathexplorer.Name = "_pathexplorer";
-            this._pathexplorer.Width = 342;
             // 
             // Main
             // 

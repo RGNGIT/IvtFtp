@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 namespace _IvtFtp
 {
@@ -97,8 +90,7 @@ namespace _IvtFtp
 
         private void OnFileOutput(object sender, EventArgs e)
         {
-            LogOutput("Лог записан! Чекай корневую директорию программы на наличие файла 'log.rgn'");
-            File.WriteAllLines(@"log.rgn", LogWrite);
+            LogOutput(FileManager.LogWriteFile(LogWrite));
         }
 
         private void OnDeleteToUploadFiles(object sender, EventArgs e)
@@ -109,15 +101,23 @@ namespace _IvtFtp
             }
         }
 
-        private void OnCallDeleteFromServer(object sender, EventArgs e)
+        // Управление серверными запросами
+
+        private void OnCallDeleteFromServer(object sender, EventArgs e) // Вызов удаления файла с сервера
         {
 
             FtpResponseLogOutput();
         }
 
-        private void OnUpdateList(object sender, EventArgs e)
+        private void OnUpdateList(object sender, EventArgs e) // Обновление списка файлов
         {
-            dataGridExplorer.Rows.Add(Encoding.UTF8.GetString(FtpClient.OnGetFileFromServer(new Uri("ftp://ftp.19ivt.ru/files/zalupa.txt")) as byte[]));
+
+            FtpResponseLogOutput();
+        }
+
+        private void OnDownloadFile(object sender, EventArgs e) // Загрузка файла
+        {
+
             FtpResponseLogOutput();
         }
 
