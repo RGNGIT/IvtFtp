@@ -34,6 +34,7 @@ namespace _IvtFtp
         {
             if(ServerUri.Scheme != Uri.UriSchemeFtp) // Если файл недоступен по протоколу FTP
             {
+                StatusList.Add("Файл недоступен по протоколу FTP");
                 return false;
             }
             else
@@ -48,13 +49,12 @@ namespace _IvtFtp
             }
         }
 
-        public static List<String> OnGetFilesNamesFromServer(Uri ServerUri)
+        public static object OnGetFileFromServer(Uri ServerUri)
         {
-            List<String> Temp = new List<String>();
             if(ServerUri.Scheme != Uri.UriSchemeFtp)
             {
                 StatusList.Add("Файл недоступен по протоколу FTP!");
-                return Temp;
+                return null;
             } 
             else
             {
@@ -63,15 +63,15 @@ namespace _IvtFtp
                 try
                 {
                     byte[] FileData = Request.DownloadData(ServerUri.ToString());
-                    Temp.Add(Encoding.UTF8.GetString(FileData));
+                    StatusList.Add($"Файл по пути '{ServerUri}' успешно загружен!");
+                    return FileData;
                 }
                 catch(Exception e)
                 {
                     StatusList.Add($"Произошло исключение по коду: {e}");
-                    return Temp;
+                    return null;
                 }
             }
-            return Temp;
         }
 
     }

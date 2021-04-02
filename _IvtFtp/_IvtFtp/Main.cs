@@ -109,5 +109,17 @@ namespace _IvtFtp
             }
         }
 
+        private void OnCallDeleteFromServer(object sender, EventArgs e)
+        {
+
+            FtpResponseLogOutput();
+        }
+
+        private void OnUpdateList(object sender, EventArgs e)
+        {
+            dataGridExplorer.Rows.Add(Encoding.UTF8.GetString(FtpClient.OnGetFileFromServer(new Uri("ftp://ftp.19ivt.ru/files/zalupa.txt")) as byte[]));
+            FtpResponseLogOutput();
+        }
+
     }
 }
