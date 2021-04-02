@@ -117,21 +117,22 @@ namespace _IvtFtp
                 FtpClient.OnDeleteFileFromServer(CurrentUri);
                 FtpResponseLogOutput();
             }
+            UpdateNetExplorer();
         }
 
         private void OnUpdateList(object sender, EventArgs e) // Обновление списка файлов
         {
-            dataGridExplorer.Rows.Clear();
             UpdateNetExplorer();
-            FtpResponseLogOutput();
         }
 
         void UpdateNetExplorer()
         {
+            dataGridExplorer.Rows.Clear();
             foreach (String i in FtpClient.OnGetDirList(new Uri(URL)))
             {
                 dataGridExplorer.Rows.Add(i);
             }
+            FtpResponseLogOutput();
         }
 
         private void OnDownloadFile(object sender, EventArgs e) // Загрузка файла

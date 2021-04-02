@@ -33,17 +33,16 @@
             this.buttonUpdate = new System.Windows.Forms.Button();
             this.buttonDelFromServer = new System.Windows.Forms.Button();
             this.buttonDownload = new System.Windows.Forms.Button();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.buttonDeleteUpload = new System.Windows.Forms.Button();
             this.buttonUpload = new System.Windows.Forms.Button();
             this.dataGridExplorer = new System.Windows.Forms.DataGridView();
-            this._pathexplorer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridFilesToLoad = new System.Windows.Forms.DataGridView();
-            this._path = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.FileOutput = new System.Windows.Forms.Button();
             this.buttonClearLog = new System.Windows.Forms.Button();
             this.LogBox = new System.Windows.Forms.ListBox();
+            this._path = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this._pathexplorer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridExplorer)).BeginInit();
@@ -67,7 +66,6 @@
             this.tabPage1.Controls.Add(this.buttonUpdate);
             this.tabPage1.Controls.Add(this.buttonDelFromServer);
             this.tabPage1.Controls.Add(this.buttonDownload);
-            this.tabPage1.Controls.Add(this.progressBar1);
             this.tabPage1.Controls.Add(this.buttonDeleteUpload);
             this.tabPage1.Controls.Add(this.buttonUpload);
             this.tabPage1.Controls.Add(this.dataGridExplorer);
@@ -110,13 +108,6 @@
             this.buttonDownload.UseVisualStyleBackColor = true;
             this.buttonDownload.Click += new System.EventHandler(this.OnDownloadFile);
             // 
-            // progressBar1
-            // 
-            this.progressBar1.Location = new System.Drawing.Point(148, 400);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(100, 23);
-            this.progressBar1.TabIndex = 5;
-            // 
             // buttonDeleteUpload
             // 
             this.buttonDeleteUpload.Location = new System.Drawing.Point(254, 400);
@@ -147,12 +138,6 @@
             this.dataGridExplorer.Size = new System.Drawing.Size(387, 383);
             this.dataGridExplorer.TabIndex = 2;
             // 
-            // _pathexplorer
-            // 
-            this._pathexplorer.HeaderText = "Файл/Каталог";
-            this._pathexplorer.Name = "_pathexplorer";
-            this._pathexplorer.Width = 342;
-            // 
             // dataGridFilesToLoad
             // 
             this.dataGridFilesToLoad.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
@@ -163,13 +148,6 @@
             this.dataGridFilesToLoad.Name = "dataGridFilesToLoad";
             this.dataGridFilesToLoad.Size = new System.Drawing.Size(385, 383);
             this.dataGridFilesToLoad.TabIndex = 1;
-            // 
-            // _path
-            // 
-            this._path.HeaderText = "Файл/Каталог";
-            this._path.Name = "_path";
-            this._path.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this._path.Width = 342;
             // 
             // tabPage2
             // 
@@ -213,6 +191,19 @@
             this.LogBox.Size = new System.Drawing.Size(788, 381);
             this.LogBox.TabIndex = 0;
             // 
+            // _path
+            // 
+            this._path.HeaderText = "Файл/Каталог";
+            this._path.Name = "_path";
+            this._path.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this._path.Width = 342;
+            // 
+            // _pathexplorer
+            // 
+            this._pathexplorer.HeaderText = "Файл/Каталог";
+            this._pathexplorer.Name = "_pathexplorer";
+            this._pathexplorer.Width = 344;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -245,12 +236,11 @@
         private System.Windows.Forms.DataGridView dataGridExplorer;
         private System.Windows.Forms.Button buttonDeleteUpload;
         private System.Windows.Forms.Button buttonUpload;
-        private System.Windows.Forms.ProgressBar progressBar1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn _path;
         private System.Windows.Forms.Button buttonDelFromServer;
         private System.Windows.Forms.Button buttonDownload;
         private System.Windows.Forms.Button buttonUpdate;
         private System.Windows.Forms.DataGridViewTextBoxColumn _pathexplorer;
+        private System.Windows.Forms.DataGridViewTextBoxColumn _path;
     }
 }
 

@@ -74,18 +74,27 @@ namespace _IvtFtp
 
         public static List<String> OnGetDirList(Uri ServerUri)
         {
-            List<String> Temp = new List<String>();
-            FtpWebRequest Request = WebRequest.Create(ServerUri) as FtpWebRequest;
-            Request.Method = WebRequestMethods.Ftp.ListDirectory;
-            Request.Credentials = CurrentCredential;
-            FtpWebResponse Response = Request.GetResponse() as FtpWebResponse;
-            Stream ResponseStream = Response.GetResponseStream();
-            StreamReader Reader = new StreamReader(ResponseStream);
-            while(Reader.Peek() != -1)
+            try
             {
-                Temp.Add(Reader.ReadLine());
+                List<String> Temp = new List<String>();
+                FtpWebRequest Request = WebRequest.Create(ServerUri) as FtpWebRequest;
+                Request.Method = WebRequestMethods.Ftp.ListDirectory;
+                Request.Credentials = CurrentCredential;
+                FtpWebResponse Response = Request.GetResponse() as FtpWebResponse;
+                Stream ResponseStream = Response.GetResponseStream();
+                StreamReader Reader = new StreamReader(ResponseStream);
+                while (Reader.Peek() != -1)
+                {
+                    Temp.Add(Reader.ReadLine());
+                }
+                StatusList.Add($"Список файлов сервера успешно обновлен!");
+                return Temp;
             }
-            return Temp;
+            catch(Exception e)
+            {
+                StatusList.Add($"Произошло исключение по коду: {e}");
+                return null;
+            }
         }
 
     }
