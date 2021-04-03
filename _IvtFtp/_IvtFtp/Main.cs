@@ -174,9 +174,9 @@ namespace _IvtFtp
                 byte[] CurrentFile = FtpClient.OnGetFileFromServer(CurrentUri);
                 FtpResponseLogOutput();
                 LogOutput(FileManager.WriteFile(CurrentFile, CurrentUri, row.Cells[0].Value.ToString()));
-                Process.Start("explorer", "DurkaDownloads");
-                LogOutput("Открываю директорию с загрузками!");
             }
+            Process.Start("explorer", "DurkaDownloads");
+            LogOutput("Открываю директорию с загрузками!");
         }
 
     }
