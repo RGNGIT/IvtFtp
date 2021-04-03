@@ -29,27 +29,27 @@
         private void InitializeComponent()
         {
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.LogBox = new System.Windows.Forms.ListBox();
-            this.buttonClearLog = new System.Windows.Forms.Button();
+            this.labelPing = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.comboBoxServers = new System.Windows.Forms.ComboBox();
             this.FileOutput = new System.Windows.Forms.Button();
+            this.buttonClearLog = new System.Windows.Forms.Button();
+            this.LogBox = new System.Windows.Forms.ListBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.dataGridFilesToLoad = new System.Windows.Forms.DataGridView();
-            this._path = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buttonUpdate = new System.Windows.Forms.Button();
+            this.buttonDelFromServer = new System.Windows.Forms.Button();
+            this.buttonDownload = new System.Windows.Forms.Button();
+            this.buttonDeleteUpload = new System.Windows.Forms.Button();
+            this.buttonUpload = new System.Windows.Forms.Button();
             this.dataGridExplorer = new System.Windows.Forms.DataGridView();
             this._pathexplorer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.buttonUpload = new System.Windows.Forms.Button();
-            this.buttonDeleteUpload = new System.Windows.Forms.Button();
-            this.buttonDownload = new System.Windows.Forms.Button();
-            this.buttonDelFromServer = new System.Windows.Forms.Button();
-            this.buttonUpdate = new System.Windows.Forms.Button();
+            this.dataGridFilesToLoad = new System.Windows.Forms.DataGridView();
+            this._path = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.comboBoxServers = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.labelPing = new System.Windows.Forms.Label();
             this.tabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridFilesToLoad)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridExplorer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridFilesToLoad)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -69,14 +69,44 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Лог";
             // 
-            // LogBox
+            // labelPing
             // 
-            this.LogBox.BackColor = System.Drawing.Color.Silver;
-            this.LogBox.FormattingEnabled = true;
-            this.LogBox.Location = new System.Drawing.Point(6, 6);
-            this.LogBox.Name = "LogBox";
-            this.LogBox.Size = new System.Drawing.Size(788, 381);
-            this.LogBox.TabIndex = 0;
+            this.labelPing.AutoSize = true;
+            this.labelPing.Location = new System.Drawing.Point(180, 405);
+            this.labelPing.Name = "labelPing";
+            this.labelPing.Size = new System.Drawing.Size(48, 13);
+            this.labelPing.TabIndex = 5;
+            this.labelPing.Text = "$Pinging";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 405);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(44, 13);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Сервер";
+            // 
+            // comboBoxServers
+            // 
+            this.comboBoxServers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxServers.FormattingEnabled = true;
+            this.comboBoxServers.Items.AddRange(new object[] {
+            "ftp.19ivt.ru"});
+            this.comboBoxServers.Location = new System.Drawing.Point(53, 402);
+            this.comboBoxServers.Name = "comboBoxServers";
+            this.comboBoxServers.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxServers.TabIndex = 3;
+            // 
+            // FileOutput
+            // 
+            this.FileOutput.Location = new System.Drawing.Point(574, 400);
+            this.FileOutput.Name = "FileOutput";
+            this.FileOutput.Size = new System.Drawing.Size(107, 23);
+            this.FileOutput.TabIndex = 2;
+            this.FileOutput.Text = "Вывести в файл";
+            this.FileOutput.UseVisualStyleBackColor = true;
+            this.FileOutput.Click += new System.EventHandler(this.OnFileOutput);
             // 
             // buttonClearLog
             // 
@@ -88,15 +118,14 @@
             this.buttonClearLog.UseVisualStyleBackColor = true;
             this.buttonClearLog.Click += new System.EventHandler(this.OnClearLog);
             // 
-            // FileOutput
+            // LogBox
             // 
-            this.FileOutput.Location = new System.Drawing.Point(574, 400);
-            this.FileOutput.Name = "FileOutput";
-            this.FileOutput.Size = new System.Drawing.Size(107, 23);
-            this.FileOutput.TabIndex = 2;
-            this.FileOutput.Text = "Вывести в файл";
-            this.FileOutput.UseVisualStyleBackColor = true;
-            this.FileOutput.Click += new System.EventHandler(this.OnFileOutput);
+            this.LogBox.BackColor = System.Drawing.Color.Silver;
+            this.LogBox.FormattingEnabled = true;
+            this.LogBox.Location = new System.Drawing.Point(6, 6);
+            this.LogBox.Name = "LogBox";
+            this.LogBox.Size = new System.Drawing.Size(788, 381);
+            this.LogBox.TabIndex = 0;
             // 
             // tabPage1
             // 
@@ -116,23 +145,54 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Клиент";
             // 
-            // dataGridFilesToLoad
+            // buttonUpdate
             // 
-            this.dataGridFilesToLoad.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.dataGridFilesToLoad.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridFilesToLoad.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this._path});
-            this.dataGridFilesToLoad.Location = new System.Drawing.Point(6, 6);
-            this.dataGridFilesToLoad.Name = "dataGridFilesToLoad";
-            this.dataGridFilesToLoad.Size = new System.Drawing.Size(385, 383);
-            this.dataGridFilesToLoad.TabIndex = 1;
+            this.buttonUpdate.Location = new System.Drawing.Point(550, 400);
+            this.buttonUpdate.Name = "buttonUpdate";
+            this.buttonUpdate.Size = new System.Drawing.Size(101, 23);
+            this.buttonUpdate.TabIndex = 8;
+            this.buttonUpdate.Text = "Обновить";
+            this.buttonUpdate.UseVisualStyleBackColor = true;
+            this.buttonUpdate.Click += new System.EventHandler(this.OnUpdateList);
             // 
-            // _path
+            // buttonDelFromServer
             // 
-            this._path.HeaderText = "Файл/Каталог";
-            this._path.Name = "_path";
-            this._path.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this._path.Width = 342;
+            this.buttonDelFromServer.Location = new System.Drawing.Point(657, 400);
+            this.buttonDelFromServer.Name = "buttonDelFromServer";
+            this.buttonDelFromServer.Size = new System.Drawing.Size(137, 23);
+            this.buttonDelFromServer.TabIndex = 7;
+            this.buttonDelFromServer.Text = "Удалить с сервера";
+            this.buttonDelFromServer.UseVisualStyleBackColor = true;
+            this.buttonDelFromServer.Click += new System.EventHandler(this.OnCallDeleteFromServer);
+            // 
+            // buttonDownload
+            // 
+            this.buttonDownload.Location = new System.Drawing.Point(407, 400);
+            this.buttonDownload.Name = "buttonDownload";
+            this.buttonDownload.Size = new System.Drawing.Size(137, 23);
+            this.buttonDownload.TabIndex = 6;
+            this.buttonDownload.Text = "Выгрузить на комп";
+            this.buttonDownload.UseVisualStyleBackColor = true;
+            this.buttonDownload.Click += new System.EventHandler(this.OnDownloadFile);
+            // 
+            // buttonDeleteUpload
+            // 
+            this.buttonDeleteUpload.Location = new System.Drawing.Point(254, 400);
+            this.buttonDeleteUpload.Name = "buttonDeleteUpload";
+            this.buttonDeleteUpload.Size = new System.Drawing.Size(137, 23);
+            this.buttonDeleteUpload.TabIndex = 4;
+            this.buttonDeleteUpload.Text = "Удалить выбранное";
+            this.buttonDeleteUpload.UseVisualStyleBackColor = true;
+            this.buttonDeleteUpload.Click += new System.EventHandler(this.OnDeleteToUploadFiles);
+            // 
+            // buttonUpload
+            // 
+            this.buttonUpload.Location = new System.Drawing.Point(6, 400);
+            this.buttonUpload.Name = "buttonUpload";
+            this.buttonUpload.Size = new System.Drawing.Size(137, 23);
+            this.buttonUpload.TabIndex = 3;
+            this.buttonUpload.Text = "Выгрузить на сервер";
+            this.buttonUpload.UseVisualStyleBackColor = true;
             // 
             // dataGridExplorer
             // 
@@ -151,54 +211,23 @@
             this._pathexplorer.Name = "_pathexplorer";
             this._pathexplorer.Width = 344;
             // 
-            // buttonUpload
+            // dataGridFilesToLoad
             // 
-            this.buttonUpload.Location = new System.Drawing.Point(6, 400);
-            this.buttonUpload.Name = "buttonUpload";
-            this.buttonUpload.Size = new System.Drawing.Size(137, 23);
-            this.buttonUpload.TabIndex = 3;
-            this.buttonUpload.Text = "Выгрузить на сервер";
-            this.buttonUpload.UseVisualStyleBackColor = true;
+            this.dataGridFilesToLoad.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.dataGridFilesToLoad.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridFilesToLoad.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this._path});
+            this.dataGridFilesToLoad.Location = new System.Drawing.Point(6, 6);
+            this.dataGridFilesToLoad.Name = "dataGridFilesToLoad";
+            this.dataGridFilesToLoad.Size = new System.Drawing.Size(385, 383);
+            this.dataGridFilesToLoad.TabIndex = 1;
             // 
-            // buttonDeleteUpload
+            // _path
             // 
-            this.buttonDeleteUpload.Location = new System.Drawing.Point(254, 400);
-            this.buttonDeleteUpload.Name = "buttonDeleteUpload";
-            this.buttonDeleteUpload.Size = new System.Drawing.Size(137, 23);
-            this.buttonDeleteUpload.TabIndex = 4;
-            this.buttonDeleteUpload.Text = "Удалить выбранное";
-            this.buttonDeleteUpload.UseVisualStyleBackColor = true;
-            this.buttonDeleteUpload.Click += new System.EventHandler(this.OnDeleteToUploadFiles);
-            // 
-            // buttonDownload
-            // 
-            this.buttonDownload.Location = new System.Drawing.Point(407, 400);
-            this.buttonDownload.Name = "buttonDownload";
-            this.buttonDownload.Size = new System.Drawing.Size(137, 23);
-            this.buttonDownload.TabIndex = 6;
-            this.buttonDownload.Text = "Выгрузить на комп";
-            this.buttonDownload.UseVisualStyleBackColor = true;
-            this.buttonDownload.Click += new System.EventHandler(this.OnDownloadFile);
-            // 
-            // buttonDelFromServer
-            // 
-            this.buttonDelFromServer.Location = new System.Drawing.Point(657, 400);
-            this.buttonDelFromServer.Name = "buttonDelFromServer";
-            this.buttonDelFromServer.Size = new System.Drawing.Size(137, 23);
-            this.buttonDelFromServer.TabIndex = 7;
-            this.buttonDelFromServer.Text = "Удалить с сервера";
-            this.buttonDelFromServer.UseVisualStyleBackColor = true;
-            this.buttonDelFromServer.Click += new System.EventHandler(this.OnCallDeleteFromServer);
-            // 
-            // buttonUpdate
-            // 
-            this.buttonUpdate.Location = new System.Drawing.Point(550, 400);
-            this.buttonUpdate.Name = "buttonUpdate";
-            this.buttonUpdate.Size = new System.Drawing.Size(101, 23);
-            this.buttonUpdate.TabIndex = 8;
-            this.buttonUpdate.Text = "Обновить";
-            this.buttonUpdate.UseVisualStyleBackColor = true;
-            this.buttonUpdate.Click += new System.EventHandler(this.OnUpdateList);
+            this._path.HeaderText = "Файл/Каталог";
+            this._path.Name = "_path";
+            this._path.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this._path.Width = 342;
             // 
             // tabControl1
             // 
@@ -209,35 +238,6 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(808, 455);
             this.tabControl1.TabIndex = 0;
-            // 
-            // comboBoxServers
-            // 
-            this.comboBoxServers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxServers.FormattingEnabled = true;
-            this.comboBoxServers.Items.AddRange(new object[] {
-            "ftp.19ivt.ru"});
-            this.comboBoxServers.Location = new System.Drawing.Point(6, 402);
-            this.comboBoxServers.Name = "comboBoxServers";
-            this.comboBoxServers.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxServers.TabIndex = 3;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 386);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 13);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Сервер";
-            // 
-            // labelPing
-            // 
-            this.labelPing.AutoSize = true;
-            this.labelPing.Location = new System.Drawing.Point(133, 405);
-            this.labelPing.Name = "labelPing";
-            this.labelPing.Size = new System.Drawing.Size(48, 13);
-            this.labelPing.TabIndex = 5;
-            this.labelPing.Text = "$Pinging";
             // 
             // Main
             // 
@@ -253,8 +253,8 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.tabPage1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridFilesToLoad)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridExplorer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridFilesToLoad)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.ResumeLayout(false);
 
