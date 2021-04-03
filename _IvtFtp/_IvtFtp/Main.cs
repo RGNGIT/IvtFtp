@@ -78,11 +78,11 @@ namespace _IvtFtp
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop) && e.Effect == DragDropEffects.Move)
             {
-                string[] Path = (string[])e.Data.GetData(DataFormats.FileDrop);
+                string[] Path = e.Data.GetData(DataFormats.FileDrop) as string[];
                 foreach (string FilePath in Path)
                 {
                     dataGridFilesToLoad.Rows.Add(FilePath);
-                    LogOutput($"[{dataGridFilesToLoad.Name}]: Файл/Каталог '{FilePath}' добавлен в очередь к загрузке");
+                    LogOutput($"Файл/Каталог '{FilePath}' добавлен в очередь к загрузке");
                 }
             }
         }
@@ -133,6 +133,7 @@ namespace _IvtFtp
             foreach(DataGridViewRow row in dataGridFilesToLoad.SelectedRows)
             {
                 dataGridFilesToLoad.Rows.Remove(row);
+                LogOutput($"Файл/Каталог '{row.Cells[0].Value}' удален из очереди к загрузке");
             }
         }
 
