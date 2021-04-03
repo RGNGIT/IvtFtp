@@ -81,7 +81,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 405);
+            this.label1.Location = new System.Drawing.Point(3, 404);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(44, 13);
             this.label1.TabIndex = 4;
@@ -93,7 +93,7 @@
             this.comboBoxServers.FormattingEnabled = true;
             this.comboBoxServers.Items.AddRange(new object[] {
             "ftp.19ivt.ru"});
-            this.comboBoxServers.Location = new System.Drawing.Point(53, 402);
+            this.comboBoxServers.Location = new System.Drawing.Point(53, 401);
             this.comboBoxServers.Name = "comboBoxServers";
             this.comboBoxServers.Size = new System.Drawing.Size(121, 21);
             this.comboBoxServers.TabIndex = 3;
@@ -202,7 +202,7 @@
             this._pathexplorer});
             this.dataGridExplorer.Location = new System.Drawing.Point(407, 6);
             this.dataGridExplorer.Name = "dataGridExplorer";
-            this.dataGridExplorer.Size = new System.Drawing.Size(387, 383);
+            this.dataGridExplorer.Size = new System.Drawing.Size(387, 381);
             this.dataGridExplorer.TabIndex = 2;
             // 
             // _pathexplorer
@@ -219,7 +219,7 @@
             this._path});
             this.dataGridFilesToLoad.Location = new System.Drawing.Point(6, 6);
             this.dataGridFilesToLoad.Name = "dataGridFilesToLoad";
-            this.dataGridFilesToLoad.Size = new System.Drawing.Size(385, 383);
+            this.dataGridFilesToLoad.Size = new System.Drawing.Size(385, 381);
             this.dataGridFilesToLoad.TabIndex = 1;
             // 
             // _path
