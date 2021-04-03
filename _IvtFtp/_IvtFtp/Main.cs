@@ -78,8 +78,8 @@ namespace _IvtFtp
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop) && e.Effect == DragDropEffects.Move)
             {
-                string[] Path = e.Data.GetData(DataFormats.FileDrop) as string[];
-                foreach (string FilePath in Path)
+                String[] Path = e.Data.GetData(DataFormats.FileDrop) as String[];
+                foreach (String FilePath in Path)
                 {
                     dataGridFilesToLoad.Rows.Add(FilePath);
                     LogOutput($"Файл/Каталог '{FilePath}' добавлен в очередь к загрузке");
@@ -100,7 +100,7 @@ namespace _IvtFtp
             labelPing.ForeColor = color;
         }
 
-        String OnPing(string URL, out Color ResColor)
+        String OnPing(String URL, out Color ResColor)
         {
             Ping ping = new Ping();
             PingReply reply;
