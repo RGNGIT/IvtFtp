@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Diagnostics;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
@@ -107,7 +108,7 @@ namespace _IvtFtp
             reply = ping.Send(URL);
             if(reply.Status == IPStatus.Success)
             {
-                ResColor = Color.LightGreen;
+                ResColor = reply.RoundtripTime < 500 ? Color.LightGreen : Color.Yellow;
                 return $"Активен, {reply.RoundtripTime}мс";
             }
             else
@@ -173,6 +174,8 @@ namespace _IvtFtp
                 byte[] CurrentFile = FtpClient.OnGetFileFromServer(CurrentUri);
                 FtpResponseLogOutput();
                 LogOutput(FileManager.WriteFile(CurrentFile, CurrentUri, row.Cells[0].Value.ToString()));
+                Process.Start("explorer", "DurkaDownloads");
+                LogOutput("Открываю директорию с загрузками!");
             }
         }
 
