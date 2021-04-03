@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
 
 namespace _IvtFtp
@@ -15,7 +17,7 @@ namespace _IvtFtp
 
         private String Login = "testuser";
         private String Password = "12345678";
-        private String URL = "ftp://ftp.19ivt.ru/files/";
+        private String URL = String.Empty;
 
         public Main()
         {
@@ -56,6 +58,8 @@ namespace _IvtFtp
         private void Main_Load(object sender, EventArgs e)
         {
             Debug();
+            comboBoxServers.SelectedIndex = comboBoxServers.FindStringExact("ftp.19ivt.ru");
+            SetServer();
             AllocConsole();
             LogOutput("FTP-клиент дурки успешно стартанул!");
             ApplyCredentialsOnStart();
@@ -86,6 +90,31 @@ namespace _IvtFtp
         void Debug()
         {
 
+        }
+
+        void SetServer()
+        {
+            URL = $"ftp://{comboBoxServers.SelectedItem}/files/";
+            Color color;
+            labelPing.Text = OnPing(comboBoxServers.SelectedItem.ToString(), out color);
+            labelPing.ForeColor = color;
+        }
+
+        String OnPing(string URL, out Color ResColor)
+        {
+            Ping ping = new Ping();
+            PingReply reply;
+            reply = ping.Send(URL);
+            if(reply.Status == IPStatus.Success)
+            {
+                ResColor = Color.LightGreen;
+                return $"Активен, {reply.RoundtripTime}мс";
+            }
+            else
+            {
+                ResColor = Color.Red;
+                return "Соединение отсутствует или произошла ошибка соединения";
+            }    
         }
 
         private void OnClearLog(object sender, EventArgs e)
