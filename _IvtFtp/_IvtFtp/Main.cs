@@ -158,12 +158,19 @@ namespace _IvtFtp
 
         void UpdateNetExplorer()
         {
-            dataGridExplorer.Rows.Clear();
-            foreach (String i in FtpClient.OnGetDirList(new Uri(URL)))
+            try
             {
-                dataGridExplorer.Rows.Add(i);
+                dataGridExplorer.Rows.Clear();
+                foreach (String i in FtpClient.OnGetDirList(new Uri(URL)))
+                {
+                    dataGridExplorer.Rows.Add(i);
+                }
+                FtpResponseLogOutput();
             }
-            FtpResponseLogOutput();
+            catch(Exception e)
+            {
+                LogOutput($"Произошло исключение по коду: {e}. Вероятно отсутствует соединение с удаленным сервером.");
+            }
         }
 
         private void OnDownloadFile(object sender, EventArgs e) // Загрузка файла
