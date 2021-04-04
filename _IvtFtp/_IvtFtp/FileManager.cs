@@ -40,6 +40,20 @@ namespace _IvtFtp
             }
         }
 
+        public static String ReadSerializedFile(out byte[] CurrentFile, String Path)
+        {
+            try
+            {
+                CurrentFile = File.ReadAllBytes(Path);
+                return $"Считывание и сериализация файла '{Path}' успешно произведены! ({CurrentFile.Length} байт)";
+            }
+            catch(Exception e)
+            {
+                CurrentFile = null;
+                return $"Произошло исключение по коду: {e}";
+            }
+        }
+
     }
 
 }

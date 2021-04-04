@@ -97,6 +97,23 @@ namespace _IvtFtp
             }
         }
 
+        public static void OnUploadFileToServer(Uri ServerUri)
+        {
+            try
+            {
+                byte[] CurrentFile;
+                StatusList.Add(FileManager.ReadSerializedFile(out CurrentFile, ServerUri.ToString()));
+                WebClient Request = new WebClient();
+                Request.UploadData("ftp://ftp.19ivt.ru/files", CurrentFile);
+                StatusList.Add($"Файл успешно загружен на сервер!");
+            }
+            catch(Exception e)
+            {
+                StatusList.Add($"Произошло исключение по коду: {e}");
+                return;
+            }
+        }
+
     }
 
 }

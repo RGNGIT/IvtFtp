@@ -90,7 +90,7 @@ namespace _IvtFtp
 
         void Debug()
         {
-
+            FtpClient.OnUploadFileToServer(new Uri(@"C:\Users\RGN\Desktop\test.txt"));
         }
 
         void SetServer()
