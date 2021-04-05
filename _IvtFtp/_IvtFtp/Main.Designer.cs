@@ -46,6 +46,7 @@
             this.dataGridFilesToLoad = new System.Windows.Forms.DataGridView();
             this._path = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.labelWorkStatus = new System.Windows.Forms.Label();
             this.tabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridExplorer)).BeginInit();
@@ -130,6 +131,7 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.Gray;
+            this.tabPage1.Controls.Add(this.labelWorkStatus);
             this.tabPage1.Controls.Add(this.buttonUpdate);
             this.tabPage1.Controls.Add(this.buttonDelFromServer);
             this.tabPage1.Controls.Add(this.buttonDownload);
@@ -239,6 +241,15 @@
             this.tabControl1.Size = new System.Drawing.Size(808, 455);
             this.tabControl1.TabIndex = 0;
             // 
+            // labelWorkStatus
+            // 
+            this.labelWorkStatus.AutoSize = true;
+            this.labelWorkStatus.Location = new System.Drawing.Point(149, 405);
+            this.labelWorkStatus.Name = "labelWorkStatus";
+            this.labelWorkStatus.Size = new System.Drawing.Size(43, 13);
+            this.labelWorkStatus.TabIndex = 9;
+            this.labelWorkStatus.Text = "$Status";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -253,6 +264,7 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridExplorer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridFilesToLoad)).EndInit();
             this.tabControl1.ResumeLayout(false);
@@ -280,6 +292,7 @@
         private System.Windows.Forms.ComboBox comboBoxServers;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label labelPing;
+        private System.Windows.Forms.Label labelWorkStatus;
     }
 }
 

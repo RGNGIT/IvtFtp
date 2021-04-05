@@ -65,6 +65,7 @@ namespace _IvtFtp
             LogOutput("FTP-клиент дурки успешно стартанул!");
             ApplyCredentialsOnStart();
             UpdateNetExplorer();
+            WorkStatus("Жду указаний...");
         }
 
         private void Files_DragEnter(object sender, DragEventArgs e)
@@ -117,6 +118,11 @@ namespace _IvtFtp
                 return "Соединение отсутствует или произошла ошибка соединения";
             }    
         }
+        
+        void WorkStatus(String Status)
+        {
+            labelWorkStatus.Text = Status;
+        }
 
         private void OnClearLog(object sender, EventArgs e)
         {
@@ -142,18 +148,22 @@ namespace _IvtFtp
 
         private void OnCallDeleteFromServer(object sender, EventArgs e) // Вызов удаления файла с сервера
         {
+            WorkStatus("Удаляю...");
             foreach (DataGridViewRow row in dataGridExplorer.SelectedRows)
             {
                 Uri CurrentUri = new Uri(URL + row.Cells[0].Value.ToString());
                 FtpClient.OnDeleteFileFromServer(CurrentUri);
                 FtpResponseLogOutput();
             }
+            WorkStatus("Удалил!");
             UpdateNetExplorer();
         }
 
         private void OnUpdateList(object sender, EventArgs e) // Обновление списка файлов
         {
+            WorkStatus("Обновляю...");
             UpdateNetExplorer();
+            WorkStatus("Обновил!");
         }
 
         void UpdateNetExplorer()
@@ -175,6 +185,7 @@ namespace _IvtFtp
 
         private void OnDownloadFile(object sender, EventArgs e) // Загрузка файла
         {
+            WorkStatus("Скачиваю...");
             foreach (DataGridViewRow row in dataGridExplorer.SelectedRows)
             {
                 Uri CurrentUri = new Uri(URL + row.Cells[0].Value.ToString());
@@ -182,6 +193,7 @@ namespace _IvtFtp
                 FtpResponseLogOutput();
                 LogOutput(FileManager.WriteFile(CurrentFile, CurrentUri, row.Cells[0].Value.ToString()));
             }
+            WorkStatus("Скачал!");
             Process.Start("explorer", "DurkaDownloads");
             LogOutput("Открываю директорию с загрузками!");
         }
