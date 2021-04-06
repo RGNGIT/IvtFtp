@@ -52,8 +52,11 @@ namespace _IvtFtp
 
         public void LogOutput(String Message)
         {
-            LogWrite.Add($"<{DateTime.Now}> {Message}");
-            LogBox.Items.Add(LogWrite[LogWrite.Count - 1]);
+            if (Message != null)
+            {
+                LogWrite.Add($"<{DateTime.Now}> {Message}");
+                LogBox.Items.Add(LogWrite[LogWrite.Count - 1]);
+            }
         }
 
         private void Main_Load(object sender, EventArgs e)
@@ -133,6 +136,7 @@ namespace _IvtFtp
         private void OnFileOutput(object sender, EventArgs e)
         {
             LogOutput(FileManager.LogWriteFile(LogWrite));
+            LogOutput(MemManager.DFGCMemClean("Main.OnFileOutput()"));
         }
 
         private void OnDeleteToUploadFiles(object sender, EventArgs e)
@@ -142,6 +146,7 @@ namespace _IvtFtp
                 dataGridFilesToLoad.Rows.Remove(row);
                 LogOutput($"Файл/Каталог '{row.Cells[0].Value}' удален из очереди к загрузке");
             }
+            LogOutput(MemManager.DFGCMemClean("Main.OnDeleteToUploadFiles()"));
         }
 
         // Управление серверными запросами
@@ -164,6 +169,7 @@ namespace _IvtFtp
             WorkStatus("Обновляю...");
             UpdateNetExplorer();
             WorkStatus("Обновил!");
+            LogOutput(MemManager.DFGCMemClean("Main.OnUpdateList()"));
         }
 
         void UpdateNetExplorer()
@@ -196,6 +202,12 @@ namespace _IvtFtp
             WorkStatus("Скачал!");
             Process.Start("explorer", "DurkaDownloads");
             LogOutput("Открываю директорию с загрузками!");
+            LogOutput(MemManager.DFGCMemClean("Main.OnDownloadFile()"));
+        }
+
+        private void GCCheck(object sender, EventArgs e)
+        {
+            MemManager.SetToShow = checkBoxGCLog.Checked;
         }
 
     }

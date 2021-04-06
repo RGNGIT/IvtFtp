@@ -13,6 +13,7 @@ namespace _IvtFtp
             try
             {
                 File.WriteAllBytes($@"DurkaDownloads\{FileName}", CurrentFile);
+                
                 return "Файл успешно записан!";
             }
             catch(DirectoryNotFoundException)

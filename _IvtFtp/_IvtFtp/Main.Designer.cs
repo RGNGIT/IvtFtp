@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.checkBoxGCLog = new System.Windows.Forms.CheckBox();
             this.labelPing = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBoxServers = new System.Windows.Forms.ComboBox();
@@ -36,6 +37,7 @@
             this.buttonClearLog = new System.Windows.Forms.Button();
             this.LogBox = new System.Windows.Forms.ListBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.labelWorkStatus = new System.Windows.Forms.Label();
             this.buttonUpdate = new System.Windows.Forms.Button();
             this.buttonDelFromServer = new System.Windows.Forms.Button();
             this.buttonDownload = new System.Windows.Forms.Button();
@@ -46,7 +48,6 @@
             this.dataGridFilesToLoad = new System.Windows.Forms.DataGridView();
             this._path = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.labelWorkStatus = new System.Windows.Forms.Label();
             this.tabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridExplorer)).BeginInit();
@@ -57,6 +58,7 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.Gray;
+            this.tabPage2.Controls.Add(this.checkBoxGCLog);
             this.tabPage2.Controls.Add(this.labelPing);
             this.tabPage2.Controls.Add(this.label1);
             this.tabPage2.Controls.Add(this.comboBoxServers);
@@ -69,6 +71,19 @@
             this.tabPage2.Size = new System.Drawing.Size(800, 429);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Лог";
+            // 
+            // checkBoxGCLog
+            // 
+            this.checkBoxGCLog.AutoSize = true;
+            this.checkBoxGCLog.Checked = true;
+            this.checkBoxGCLog.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxGCLog.Location = new System.Drawing.Point(616, 6);
+            this.checkBoxGCLog.Name = "checkBoxGCLog";
+            this.checkBoxGCLog.Size = new System.Drawing.Size(178, 17);
+            this.checkBoxGCLog.TabIndex = 6;
+            this.checkBoxGCLog.Text = "Показать лог очистки памяти";
+            this.checkBoxGCLog.UseVisualStyleBackColor = true;
+            this.checkBoxGCLog.CheckedChanged += new System.EventHandler(this.GCCheck);
             // 
             // labelPing
             // 
@@ -146,6 +161,15 @@
             this.tabPage1.Size = new System.Drawing.Size(800, 429);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Клиент";
+            // 
+            // labelWorkStatus
+            // 
+            this.labelWorkStatus.AutoSize = true;
+            this.labelWorkStatus.Location = new System.Drawing.Point(149, 405);
+            this.labelWorkStatus.Name = "labelWorkStatus";
+            this.labelWorkStatus.Size = new System.Drawing.Size(43, 13);
+            this.labelWorkStatus.TabIndex = 9;
+            this.labelWorkStatus.Text = "$Status";
             // 
             // buttonUpdate
             // 
@@ -241,15 +265,6 @@
             this.tabControl1.Size = new System.Drawing.Size(808, 455);
             this.tabControl1.TabIndex = 0;
             // 
-            // labelWorkStatus
-            // 
-            this.labelWorkStatus.AutoSize = true;
-            this.labelWorkStatus.Location = new System.Drawing.Point(149, 405);
-            this.labelWorkStatus.Name = "labelWorkStatus";
-            this.labelWorkStatus.Size = new System.Drawing.Size(43, 13);
-            this.labelWorkStatus.TabIndex = 9;
-            this.labelWorkStatus.Text = "$Status";
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -293,6 +308,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label labelPing;
         private System.Windows.Forms.Label labelWorkStatus;
+        private System.Windows.Forms.CheckBox checkBoxGCLog;
     }
 }
 

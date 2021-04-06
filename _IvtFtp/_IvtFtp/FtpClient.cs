@@ -33,6 +33,7 @@ namespace _IvtFtp
             if(ServerUri.Scheme != Uri.UriSchemeFtp) // Если файл недоступен по протоколу FTP
             {
                 StatusList.Add("Файл недоступен по протоколу FTP");
+                StatusList.Add(MemManager.DFGCMemClean("OnDeleteFileFromServer()"));
                 return false;
             }
             else
@@ -43,6 +44,7 @@ namespace _IvtFtp
                 FtpWebResponse Response = Request.GetResponse() as FtpWebResponse;
                 StatusList.Add($"Статус удаления файла '{ServerUri}': {Response.StatusDescription}");
                 Response.Close();
+                StatusList.Add(MemManager.DFGCMemClean("OnDeleteFileFromServer()"));
                 return true;
             }
         }
@@ -52,6 +54,7 @@ namespace _IvtFtp
             if(ServerUri.Scheme != Uri.UriSchemeFtp)
             {
                 StatusList.Add("Файл недоступен по протоколу FTP!");
+                StatusList.Add(MemManager.DFGCMemClean("FtpClient.OnGetFileFromServer()"));
                 return null;
             } 
             else
@@ -62,11 +65,13 @@ namespace _IvtFtp
                 {
                     byte[] FileData = Request.DownloadData(ServerUri.ToString());
                     StatusList.Add($"Сериализованый поток байтов файла '{ServerUri}' успешно загружен! ({FileData.Length} байт)");
+                    StatusList.Add(MemManager.DFGCMemClean("FtpClient.OnGetFileFromServer()"));
                     return FileData;
                 }
                 catch(Exception e)
                 {
                     StatusList.Add($"Произошло исключение по коду: {e}");
+                    StatusList.Add(MemManager.DFGCMemClean("FtpClient.OnGetFileFromServer()"));
                     return null;
                 }
             }
@@ -88,11 +93,13 @@ namespace _IvtFtp
                     Temp.Add(Reader.ReadLine());
                 }
                 StatusList.Add($"Список файлов сервера успешно обновлен!");
+                StatusList.Add(MemManager.DFGCMemClean("FtpClient.OnGetDirList()"));
                 return Temp;
             }
             catch(Exception e)
             {
                 StatusList.Add($"Произошло исключение по коду: {e}");
+                StatusList.Add(MemManager.DFGCMemClean("FtpClient.OnGetDirList()"));
                 return null;
             }
         }
