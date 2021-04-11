@@ -33,7 +33,7 @@ namespace _IvtFtp
             try
             {
                 File.WriteAllLines(@"log.rgn", LogWrite);
-                return "Лог записан! Чекай корневую директорию программы на наличие файла 'log.rgn'";
+                return "Лог записан и открыт!";
             }
             catch(Exception e)
             {

@@ -28,7 +28,7 @@ namespace _IvtFtp
             dataGridFilesToLoad.DragEnter += new DragEventHandler(Files_DragEnter);
         }
 
-        static String Version = "0.1";
+        static String Version = "/InDev/";
         List<String> LogWrite = new List<String>() 
         { 
             $"[DurkaFiles v{Version} by RGN]",
@@ -136,6 +136,7 @@ namespace _IvtFtp
         private void OnFileOutput(object sender, EventArgs e)
         {
             LogOutput(FileManager.LogWriteFile(LogWrite));
+            Process.Start("log.rgn");
             LogOutput(MemManager.DFGCMemClean("Main.OnFileOutput()"));
         }
 
