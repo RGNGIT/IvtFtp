@@ -8,6 +8,11 @@ namespace _IvtFtp
     public class FileManager
     {
 
+        ~FileManager() 
+        {
+            // Program.MainRef.LogOutput($"Экземпляр {this} был уничтожен");
+        }
+
         public String WriteFile(byte[] CurrentFile, Uri ServerUri, String FileName)
         {
             try

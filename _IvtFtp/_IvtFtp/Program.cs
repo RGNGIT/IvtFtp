@@ -18,5 +18,8 @@ namespace _IvtFtp
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Main());
         }
+
+        public static Main MainRef;
+
     }
 }

@@ -17,6 +17,11 @@ namespace _IvtFtp
             this.ToShow = ToShow;
         }
 
+        ~MemManager()
+        {
+            // Program.MainRef.LogOutput($"Экземпляр {this} был уничтожен");
+        }
+
         public String DFGCMemClean(String Method)
         {
             double Before = GC.GetTotalMemory(true);

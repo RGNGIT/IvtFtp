@@ -23,6 +23,7 @@ namespace _IvtFtp
         public Main()
         {
             InitializeComponent();
+            Program.MainRef = this;
             dataGridFilesToLoad.AllowDrop = true;
             dataGridFilesToLoad.DragDrop += new DragEventHandler(Files_DragDrop);
             dataGridFilesToLoad.DragEnter += new DragEventHandler(Files_DragEnter);

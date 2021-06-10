@@ -35,6 +35,11 @@ namespace _IvtFtp
             this.ToShow = ToShow;
         }
 
+        ~FtpClient()
+        {
+            // Program.MainRef.LogOutput($"Экземпляр {this} был уничтожен");
+        }
+
         public bool OnDeleteFileFromServer(Uri ServerUri) // (Схема) Параметр формата ftp URL ((Главное зеркало)ftp://ftp.19ivt.ru + Имя Файла + Расширение)
         {
             MemManager memManager = new MemManager(ToShow);
