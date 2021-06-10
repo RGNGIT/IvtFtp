@@ -128,7 +128,6 @@ namespace _IvtFtp
                 FtpWebRequest Request = WebRequest.Create($"ftp://{ServerPath}/files/" + FilePath) as FtpWebRequest;
                 Request.Credentials = CurrentCredential;
                 Request.Method = WebRequestMethods.Ftp.UploadFileWithUniqueName;
-                FileStream FileStream = new FileStream(FilePath, FileMode.Open);
                 byte[] FileData = File.ReadAllBytes(FilePath);
                 Request.ContentLength = FileData.Length;
                 Stream RequestStream = Request.GetRequestStream();
