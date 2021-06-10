@@ -215,5 +215,14 @@ namespace _IvtFtp
             SetToShow = checkBoxGCLog.Checked;
         }
 
+        private void buttonUpload_Click(object sender, EventArgs e)
+        {
+            FtpClient ftpClient = new FtpClient(new System.Net.NetworkCredential(Login, Password), SetToShow);
+            for (int i = 0; i < dataGridFilesToLoad.Rows.Count - 1; i++)
+            {
+                ftpClient.OnUploadFileToServer(comboBoxServers.SelectedItem.ToString(), dataGridFilesToLoad.Rows[i].Cells[0].Value.ToString());
+            }
+            FtpResponseLogOutput(ftpClient);
+        }
     }
 }

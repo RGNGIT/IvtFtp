@@ -121,16 +121,21 @@ namespace _IvtFtp
 
         // Далее экспериментальная часть
 
-        public void OnUploadFileToServer(Uri ServerUri)
+        public void OnUploadFileToServer(String ServerPath, String FilePath)
         {
-            FileManager fileManager = new FileManager();
             try
             {
-                byte[] CurrentFile;
-                StatusList.Add(fileManager.ReadSerializedFile(out CurrentFile, ServerUri.ToString()));
-                WebClient Request = new WebClient();
-                Request.UploadData("ftp://ftp.19ivt.ru/files", CurrentFile);
-                StatusList.Add($"Файл успешно загружен на сервер!");
+                FtpWebRequest Request = WebRequest.Create($"ftp://{ServerPath}/files/" + FilePath) as FtpWebRequest;
+                Request.Credentials = CurrentCredential;
+                Request.Method = WebRequestMethods.Ftp.UploadFileWithUniqueName;
+                FileStream FileStream = new FileStream(FilePath, FileMode.Open);
+                byte[] FileData = File.ReadAllBytes(FilePath);
+                Request.ContentLength = FileData.Length;
+                Stream RequestStream = Request.GetRequestStream();
+                RequestStream.Write(FileData, 0, FileData.Length);
+                RequestStream.Close();
+                FtpWebResponse Response = Request.GetResponse() as FtpWebResponse;
+                StatusList.Add($"Файл '{FilePath}' успешно загружен на сервер! ({FileData.Length} байт)");
             }
             catch(Exception e)
             {

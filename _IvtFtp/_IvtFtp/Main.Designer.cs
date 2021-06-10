@@ -219,6 +219,7 @@
             this.buttonUpload.TabIndex = 3;
             this.buttonUpload.Text = "Выгрузить на сервер";
             this.buttonUpload.UseVisualStyleBackColor = true;
+            this.buttonUpload.Click += new System.EventHandler(this.buttonUpload_Click);
             // 
             // dataGridExplorer
             // 
