@@ -114,6 +114,8 @@ namespace _IvtFtp
             }
         }
 
+        // Далее экспериментальная часть
+
         public void OnUploadFileToServer(Uri ServerUri)
         {
             FileManager fileManager = new FileManager();

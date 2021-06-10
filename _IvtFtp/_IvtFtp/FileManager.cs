@@ -41,6 +41,8 @@ namespace _IvtFtp
             }
         }
 
+        // Далее экспериментальная часть
+
         public String ReadSerializedFile(out byte[] CurrentFile, String Path)
         {
             try

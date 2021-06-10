@@ -35,9 +35,8 @@ namespace _IvtFtp
             $"[First initialized at {DateTime.Now}]"
         };
 
-        void FtpResponseLogOutput()
+        void FtpResponseLogOutput(FtpClient ftpClient)
         {
-            FtpClient ftpClient = new FtpClient(new System.Net.NetworkCredential(Login, Password), SetToShow);
             foreach(String i in ftpClient.GetStatusList) 
             {
                 LogOutput(i);
@@ -156,7 +155,7 @@ namespace _IvtFtp
             {
                 Uri CurrentUri = new Uri(URL + row.Cells[0].Value.ToString());
                 ftpClient.OnDeleteFileFromServer(CurrentUri);
-                FtpResponseLogOutput();
+                FtpResponseLogOutput(ftpClient);
             }
             WorkStatus("Удалил!");
             UpdateNetExplorer();
@@ -181,7 +180,7 @@ namespace _IvtFtp
                 {
                     dataGridExplorer.Rows.Add(i);
                 }
-                FtpResponseLogOutput();
+                FtpResponseLogOutput(ftpClient);
             }
             catch(Exception e)
             {
@@ -199,7 +198,7 @@ namespace _IvtFtp
             {
                 Uri CurrentUri = new Uri(URL + row.Cells[0].Value.ToString());
                 byte[] CurrentFile = ftpClient.OnGetFileFromServer(CurrentUri);
-                FtpResponseLogOutput();
+                FtpResponseLogOutput(ftpClient);
                 LogOutput(fileManager.WriteFile(CurrentFile, CurrentUri, row.Cells[0].Value.ToString()));
             }
             WorkStatus("Скачал!");
