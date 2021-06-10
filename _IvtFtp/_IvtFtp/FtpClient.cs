@@ -6,13 +6,14 @@ using System.Collections.Generic;
 namespace _IvtFtp
 {
 
-    static public class FtpClient
+    public class FtpClient
     {
 
-        private static List<String> StatusList = new List<String>();
-        private static NetworkCredential CurrentCredential;
+        private List<String> StatusList = new List<String>();
+        private NetworkCredential CurrentCredential;
+        private bool ToShow;
 
-        public static List<String> GetStatusList
+        public List<String> GetStatusList
         {
             get
             {
@@ -20,7 +21,7 @@ namespace _IvtFtp
             }
         }
 
-        public static NetworkCredential SetCredential
+        public NetworkCredential SetCredential
         {
             set
             {
@@ -28,12 +29,19 @@ namespace _IvtFtp
             }
         }
 
-        public static bool OnDeleteFileFromServer(Uri ServerUri) // (Схема) Параметр формата ftp URL ((Главное зеркало)ftp://ftp.19ivt.ru + Имя Файла + Расширение)
+        public FtpClient(NetworkCredential CurrentCredential, bool ToShow)
         {
-            if(ServerUri.Scheme != Uri.UriSchemeFtp) // Если файл недоступен по протоколу FTP
+            this.CurrentCredential = CurrentCredential;
+            this.ToShow = ToShow;
+        }
+
+        public bool OnDeleteFileFromServer(Uri ServerUri) // (Схема) Параметр формата ftp URL ((Главное зеркало)ftp://ftp.19ivt.ru + Имя Файла + Расширение)
+        {
+            MemManager memManager = new MemManager(ToShow);
+            if (ServerUri.Scheme != Uri.UriSchemeFtp) // Если файл недоступен по протоколу FTP
             {
                 StatusList.Add("Файл недоступен по протоколу FTP");
-                StatusList.Add(MemManager.DFGCMemClean("OnDeleteFileFromServer()"));
+                StatusList.Add(memManager.DFGCMemClean("OnDeleteFileFromServer()"));
                 return false;
             }
             else
@@ -44,17 +52,18 @@ namespace _IvtFtp
                 FtpWebResponse Response = Request.GetResponse() as FtpWebResponse;
                 StatusList.Add($"Статус удаления файла '{ServerUri}': {Response.StatusDescription}");
                 Response.Close();
-                StatusList.Add(MemManager.DFGCMemClean("OnDeleteFileFromServer()"));
+                StatusList.Add(memManager.DFGCMemClean("OnDeleteFileFromServer()"));
                 return true;
             }
         }
 
-        public static byte[] OnGetFileFromServer(Uri ServerUri) // Получание сериализованного потока байтов файла
+        public byte[] OnGetFileFromServer(Uri ServerUri) // Получание сериализованного потока байтов файла
         {
-            if(ServerUri.Scheme != Uri.UriSchemeFtp)
+            MemManager memManager = new MemManager(ToShow);
+            if (ServerUri.Scheme != Uri.UriSchemeFtp)
             {
                 StatusList.Add("Файл недоступен по протоколу FTP!");
-                StatusList.Add(MemManager.DFGCMemClean("FtpClient.OnGetFileFromServer()"));
+                StatusList.Add(memManager.DFGCMemClean("FtpClient.OnGetFileFromServer()"));
                 return null;
             } 
             else
@@ -65,20 +74,21 @@ namespace _IvtFtp
                 {
                     byte[] FileData = Request.DownloadData(ServerUri.ToString());
                     StatusList.Add($"Сериализованый поток байтов файла '{ServerUri}' успешно загружен! ({FileData.Length} байт)");
-                    StatusList.Add(MemManager.DFGCMemClean("FtpClient.OnGetFileFromServer()"));
+                    StatusList.Add(memManager.DFGCMemClean("FtpClient.OnGetFileFromServer()"));
                     return FileData;
                 }
                 catch(Exception e)
                 {
                     StatusList.Add($"Произошло исключение по коду: {e}");
-                    StatusList.Add(MemManager.DFGCMemClean("FtpClient.OnGetFileFromServer()"));
+                    StatusList.Add(memManager.DFGCMemClean("FtpClient.OnGetFileFromServer()"));
                     return null;
                 }
             }
         }
 
-        public static List<String> OnGetDirList(Uri ServerUri)
+        public List<String> OnGetDirList(Uri ServerUri)
         {
+            MemManager memManager = new MemManager(ToShow);
             try
             {
                 List<String> Temp = new List<String>();
@@ -93,23 +103,24 @@ namespace _IvtFtp
                     Temp.Add(Reader.ReadLine());
                 }
                 StatusList.Add($"Список файлов сервера успешно обновлен!");
-                StatusList.Add(MemManager.DFGCMemClean("FtpClient.OnGetDirList()"));
+                StatusList.Add(memManager.DFGCMemClean("FtpClient.OnGetDirList()"));
                 return Temp;
             }
             catch(Exception e)
             {
                 StatusList.Add($"Произошло исключение по коду: {e}");
-                StatusList.Add(MemManager.DFGCMemClean("FtpClient.OnGetDirList()"));
+                StatusList.Add(memManager.DFGCMemClean("FtpClient.OnGetDirList()"));
                 return null;
             }
         }
 
-        public static void OnUploadFileToServer(Uri ServerUri)
+        public void OnUploadFileToServer(Uri ServerUri)
         {
+            FileManager fileManager = new FileManager();
             try
             {
                 byte[] CurrentFile;
-                StatusList.Add(FileManager.ReadSerializedFile(out CurrentFile, ServerUri.ToString()));
+                StatusList.Add(fileManager.ReadSerializedFile(out CurrentFile, ServerUri.ToString()));
                 WebClient Request = new WebClient();
                 Request.UploadData("ftp://ftp.19ivt.ru/files", CurrentFile);
                 StatusList.Add($"Файл успешно загружен на сервер!");

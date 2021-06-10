@@ -5,10 +5,10 @@ using System.Collections.Generic;
 namespace _IvtFtp
 {
 
-    public static class FileManager
+    public class FileManager
     {
 
-        public static String WriteFile(byte[] CurrentFile, Uri ServerUri, String FileName)
+        public String WriteFile(byte[] CurrentFile, Uri ServerUri, String FileName)
         {
             try
             {
@@ -28,7 +28,7 @@ namespace _IvtFtp
             }
         }
 
-        public static String LogWriteFile(List<String> LogWrite)
+        public String LogWriteFile(List<String> LogWrite)
         {
             try
             {
@@ -41,7 +41,7 @@ namespace _IvtFtp
             }
         }
 
-        public static String ReadSerializedFile(out byte[] CurrentFile, String Path)
+        public String ReadSerializedFile(out byte[] CurrentFile, String Path)
         {
             try
             {

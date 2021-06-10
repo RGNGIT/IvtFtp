@@ -7,20 +7,17 @@ using System.Threading.Tasks;
 namespace _IvtFtp
 {
 
-    public static class MemManager
+    public class MemManager
     {
 
-        static bool ToShow = true;
+        private bool ToShow = true;
 
-        public static bool SetToShow
+        public MemManager(bool ToShow)
         {
-            set
-            {
-                ToShow = value;
-            }
+            this.ToShow = ToShow;
         }
 
-        public static String DFGCMemClean(String Method)
+        public String DFGCMemClean(String Method)
         {
             double Before = GC.GetTotalMemory(true);
             GC.Collect();

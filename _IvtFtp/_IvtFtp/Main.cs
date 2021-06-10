@@ -35,19 +35,13 @@ namespace _IvtFtp
             $"[First initialized at {DateTime.Now}]"
         };
 
-        void ApplyCredentialsOnStart()
-        {
-            FtpClient.SetCredential = new System.Net.NetworkCredential(Login, Password);
-            LogOutput($"Настройки авторизации успешно применены! (System.Net.NetworkCredential({Login}, {Password}))");
-        }
-
         void FtpResponseLogOutput()
         {
-            foreach(String i in FtpClient.GetStatusList) 
+            FtpClient ftpClient = new FtpClient(new System.Net.NetworkCredential(Login, Password), SetToShow);
+            foreach(String i in ftpClient.GetStatusList) 
             {
                 LogOutput(i);
             }
-            FtpClient.GetStatusList.Clear();
         }
 
         public void LogOutput(String Message)
@@ -66,7 +60,6 @@ namespace _IvtFtp
             SetServer();
             AllocConsole();
             LogOutput("FTP-клиент дурки успешно стартанул!");
-            ApplyCredentialsOnStart();
             UpdateNetExplorer();
             WorkStatus("Жду указаний...");
         }
@@ -94,7 +87,7 @@ namespace _IvtFtp
 
         void Debug()
         {
-            FtpClient.OnUploadFileToServer(new Uri(@"C:\Users\RGN\Desktop\test.txt"));
+
         }
 
         void SetServer()
@@ -135,19 +128,22 @@ namespace _IvtFtp
 
         private void OnFileOutput(object sender, EventArgs e)
         {
-            LogOutput(FileManager.LogWriteFile(LogWrite));
+            FileManager fileManager = new FileManager();
+            MemManager memManager = new MemManager(SetToShow);
+            LogOutput(fileManager.LogWriteFile(LogWrite));
             Process.Start("log.rgn");
-            LogOutput(MemManager.DFGCMemClean("Main.OnFileOutput()"));
+            LogOutput(memManager.DFGCMemClean("Main.OnFileOutput()"));
         }
 
         private void OnDeleteToUploadFiles(object sender, EventArgs e)
         {
-            foreach(DataGridViewRow row in dataGridFilesToLoad.SelectedRows)
+            MemManager memManager = new MemManager(SetToShow);
+            foreach (DataGridViewRow row in dataGridFilesToLoad.SelectedRows)
             {
                 dataGridFilesToLoad.Rows.Remove(row);
                 LogOutput($"Файл/Каталог '{row.Cells[0].Value}' удален из очереди к загрузке");
             }
-            LogOutput(MemManager.DFGCMemClean("Main.OnDeleteToUploadFiles()"));
+            LogOutput(memManager.DFGCMemClean("Main.OnDeleteToUploadFiles()"));
         }
 
         // Управление серверными запросами
@@ -155,10 +151,11 @@ namespace _IvtFtp
         private void OnCallDeleteFromServer(object sender, EventArgs e) // Вызов удаления файла с сервера
         {
             WorkStatus("Удаляю...");
+            FtpClient ftpClient = new FtpClient(new System.Net.NetworkCredential(Login, Password), SetToShow);
             foreach (DataGridViewRow row in dataGridExplorer.SelectedRows)
             {
                 Uri CurrentUri = new Uri(URL + row.Cells[0].Value.ToString());
-                FtpClient.OnDeleteFileFromServer(CurrentUri);
+                ftpClient.OnDeleteFileFromServer(CurrentUri);
                 FtpResponseLogOutput();
             }
             WorkStatus("Удалил!");
@@ -168,17 +165,19 @@ namespace _IvtFtp
         private void OnUpdateList(object sender, EventArgs e) // Обновление списка файлов
         {
             WorkStatus("Обновляю...");
+            MemManager memManager = new MemManager(SetToShow);
             UpdateNetExplorer();
             WorkStatus("Обновил!");
-            LogOutput(MemManager.DFGCMemClean("Main.OnUpdateList()"));
+            LogOutput(memManager.DFGCMemClean("Main.OnUpdateList()"));
         }
 
         void UpdateNetExplorer()
         {
+            FtpClient ftpClient = new FtpClient(new System.Net.NetworkCredential(Login, Password), SetToShow);
             try
             {
                 dataGridExplorer.Rows.Clear();
-                foreach (String i in FtpClient.OnGetDirList(new Uri(URL)))
+                foreach (String i in ftpClient.OnGetDirList(new Uri(URL)))
                 {
                     dataGridExplorer.Rows.Add(i);
                 }
@@ -193,22 +192,27 @@ namespace _IvtFtp
         private void OnDownloadFile(object sender, EventArgs e) // Загрузка файла
         {
             WorkStatus("Скачиваю...");
+            FtpClient ftpClient = new FtpClient(new System.Net.NetworkCredential(Login, Password), SetToShow);
+            FileManager fileManager = new FileManager();
+            MemManager memManager = new MemManager(SetToShow);
             foreach (DataGridViewRow row in dataGridExplorer.SelectedRows)
             {
                 Uri CurrentUri = new Uri(URL + row.Cells[0].Value.ToString());
-                byte[] CurrentFile = FtpClient.OnGetFileFromServer(CurrentUri);
+                byte[] CurrentFile = ftpClient.OnGetFileFromServer(CurrentUri);
                 FtpResponseLogOutput();
-                LogOutput(FileManager.WriteFile(CurrentFile, CurrentUri, row.Cells[0].Value.ToString()));
+                LogOutput(fileManager.WriteFile(CurrentFile, CurrentUri, row.Cells[0].Value.ToString()));
             }
             WorkStatus("Скачал!");
             Process.Start("explorer", "DurkaDownloads");
             LogOutput("Открываю директорию с загрузками!");
-            LogOutput(MemManager.DFGCMemClean("Main.OnDownloadFile()"));
+            LogOutput(memManager.DFGCMemClean("Main.OnDownloadFile()"));
         }
+
+        bool SetToShow = true;
 
         private void GCCheck(object sender, EventArgs e)
         {
-            MemManager.SetToShow = checkBoxGCLog.Checked;
+            SetToShow = checkBoxGCLog.Checked;
         }
 
     }
